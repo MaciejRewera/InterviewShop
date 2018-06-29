@@ -11,8 +11,7 @@ object GrocerySystem {
     Orange -> BigDecimal(0.25)
   )
 
-  def totalCost(items: Seq[Fruit]): BigDecimal = {
-
-    return null
+  def totalCost(products: Seq[Fruit]): BigDecimal = {
+    products.map(productsPrices(_)).sum.setScale(2, BigDecimal.RoundingMode.HALF_UP)
   }
 }
