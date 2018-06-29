@@ -14,11 +14,21 @@ class GrocerySystemTest extends FlatSpec with Matchers {
     GrocerySystem.totalCost(Seq()) shouldBe
       BigDecimal(0).setScale(2, BigDecimal.RoundingMode.HALF_UP)
   }
-  it should "return 2.05 for items [ Apple, Apple, Orange, Apple ]" in {
+  it should "return 1.45 for items [ Apple, Apple, Orange, Apple ]" in {
     val products = Seq(Apple, Apple, Orange, Apple)
     GrocerySystem.totalCost(products) shouldBe
-      BigDecimal(2.05).setScale(2, BigDecimal.RoundingMode.HALF_UP)
+      BigDecimal(1.45).setScale(2, BigDecimal.RoundingMode.HALF_UP)
   }
 
+  it should "return 0.6 for 2 Apples" in {
+    val products = Seq(Apple, Apple)
+    GrocerySystem.totalCost(products) shouldBe
+      BigDecimal(0.6).setScale(2, BigDecimal.RoundingMode.HALF_UP)
+  }
+  it should "return 0.5 for 3 Oranges" in {
+    val products = Seq(Orange, Orange, Orange)
+    GrocerySystem.totalCost(products) shouldBe
+      BigDecimal(0.5).setScale(2, BigDecimal.RoundingMode.HALF_UP)
+  }
 
 }
