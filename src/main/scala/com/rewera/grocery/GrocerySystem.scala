@@ -12,6 +12,19 @@ object GrocerySystem {
   )
 
   def totalCost(products: Seq[Fruit]): BigDecimal = {
-    products.map(productsPrices(_)).sum.setScale(2, BigDecimal.RoundingMode.HALF_UP)
+    val priceBeforeDiscount =
+      products.map(productsPrices(_)).sum.setScale(2, BigDecimal.RoundingMode.HALF_UP)
+
+    priceBeforeDiscount - calcDiscount(products)
+  }
+
+  def calcDiscount(products: Seq[Fruit]): BigDecimal = {
+    val applesAmount = products.count(_.equals(Apple))
+    val orangesAmount = products.count(_.equals(Orange))
+
+    val applesDiscount = ((applesAmount / 2) * productsPrices(Apple)).setScale(2, BigDecimal.RoundingMode.HALF_UP)
+    val orangesDiscount = ((orangesAmount / 3) * productsPrices(Orange))setScale(2, BigDecimal.RoundingMode.HALF_UP)
+
+    applesDiscount + orangesDiscount
   }
 }
